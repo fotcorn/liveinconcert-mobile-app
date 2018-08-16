@@ -33,22 +33,34 @@ class _NewConcertsState extends State<NewConcerts> {
       itemCount: this.concerts.length,
       itemBuilder: (context, index) {
         final concert = this.concerts[index];
-        return Column(
-          children: [
-            Text(
-              concert.artist,
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            Row(
-              children: [
-                Text(concert.location),
-                Text(formatter.format(concert.dateTime)),
-              ],
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            ),
-              
-          ],
-          crossAxisAlignment: CrossAxisAlignment.start,
+        return Container(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              Container(
+                padding: EdgeInsets.only(bottom: 5.0),
+                child: Text(
+                  concert.artist,
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22.0),
+                ),
+              ),
+              Row(
+                children: [
+                  Text(
+                    concert.location,
+                    style: TextStyle(fontSize: 18.0)
+                  ),
+                  Text(
+                    formatter.format(concert.dateTime),
+                    style: TextStyle(fontSize: 18.0)
+                  ),
+                ],
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              ),
+                
+            ],
+            crossAxisAlignment: CrossAxisAlignment.start,
+          )
         );
       }
     );
