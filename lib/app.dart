@@ -61,8 +61,8 @@ class _AppState extends State<App> {
           ),
           body: TabBarView(
             children: [
-             MyHomePage(title: 'home') ,
-             MyHomePage(title: 'second'),
+             NewConcerts() ,
+             NewConcerts(),
             ],
           )
         )
