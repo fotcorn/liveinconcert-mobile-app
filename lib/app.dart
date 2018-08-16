@@ -44,11 +44,29 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'Live in Concert',
       theme: new ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: new MyHomePage(title: 'Live in Concert'),
+      home: DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text('Live in Conert'),
+            bottom: TabBar(
+              tabs: [
+                Tab(icon: Icon(Icons.new_releases)),
+                Tab(icon: Icon(Icons.music_note)),
+              ]
+            )
+          ),
+          body: TabBarView(
+            children: [
+             MyHomePage(title: 'home') ,
+             MyHomePage(title: 'second'),
+            ],
+          )
+        )
+      )
     );
   }
 }
