@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'new_concerts.dart';
+import 'accepted_concerts.dart';
 
 class App extends StatefulWidget {
 
@@ -62,7 +63,7 @@ class _AppState extends State<App> {
           body: TabBarView(
             children: [
              NewConcerts() ,
-             NewConcerts(),
+             AcceptedConcerts(),
             ],
           )
         )
