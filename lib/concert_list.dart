@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'data.dart';
 
-
 class ConcertList extends StatelessWidget {
   ConcertList({Key key, this.rsvp}) : super(key: key);
 
