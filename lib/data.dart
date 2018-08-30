@@ -19,7 +19,7 @@ class Concert {
 }
 
 Future<List<Concert>> fetchConcerts({String rsvp = 'not_yet_answered'}) async {
-  final response = await http.post('http://10.0.0.27:8000/graphql/', body: {
+  final response = await http.post('http://172.20.10.7:8000/graphql/', body: {
     'query': '''
 {
   eventRsvps(rsvp:"$rsvp") {
