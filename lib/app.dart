@@ -61,7 +61,7 @@ class _AppState extends State<App> {
         ),
         home: Scaffold(
           appBar: AppBar(
-            title: Text('Live in Conert'),
+            title: Text('Live in Concert'),
           ),
           body: _children[_currentIndex],
           bottomNavigationBar: BottomNavigationBar(
