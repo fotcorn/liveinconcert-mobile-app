@@ -13,6 +13,12 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
+  int _currentIndex = 0;
+  final List<Widget> _children = [
+    NewConcerts() ,
+    AcceptedConcerts(),
+   ];
+
   final FirebaseMessaging _firebaseMessaging = new FirebaseMessaging();
 
   @override
@@ -41,6 +47,12 @@ class _AppState extends State<App> {
     });
   }
 
+  void onTabTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+   });
+  }
+
     // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -48,25 +60,26 @@ class _AppState extends State<App> {
       theme: new ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: DefaultTabController(
-        length: 2,
-        child: Scaffold(
-          appBar: AppBar(
-            title: Text('Live in Conert'),
-            bottom: TabBar(
-              tabs: [
-                Tab(icon: Icon(Icons.new_releases)),
-                Tab(icon: Icon(Icons.music_note)),
-              ]
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Live in Conert'),
+        ),
+        body: _children[_currentIndex],
+        bottomNavigationBar: BottomNavigationBar(
+          onTap: onTabTapped,
+          currentIndex: _currentIndex,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.new_releases),
+              title: Text("New concerts")
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.music_note),
+              title: Text("Favourites")
             )
-          ),
-          body: TabBarView(
-            children: [
-             NewConcerts() ,
-             AcceptedConcerts(),
-            ],
-          )
-        )
+          ]
+        ),
+
       )
     );
   }
