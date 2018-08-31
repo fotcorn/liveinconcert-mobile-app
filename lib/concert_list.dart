@@ -30,7 +30,7 @@ class ConcertList extends StatelessWidget {
 
   Widget listItem(Concert concert) {
     return Container(
-        padding: EdgeInsets.all(16.0),
+        padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 25.0),
         child: Column(
           children: [
             Container(
