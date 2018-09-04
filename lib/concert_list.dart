@@ -2,30 +2,41 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'data.dart';
 
-class ConcertList extends StatelessWidget {
+class ConcertList extends StatefulWidget {
+  final String rsvp;
+
   ConcertList({Key key, this.rsvp}) : super(key: key);
+
+  @override
+  _ConcertListState createState() => new _ConcertListState(this.rsvp);
+}
+
+class _ConcertListState extends State<ConcertList> {
+
+  _ConcertListState(this.rsvp);
 
   final String rsvp;
   final DateFormat formatter = new DateFormat('dd.MM.yyyy HH:mm');
+  List<Concert> concerts = new List<Concert>();
+
+  @override
+  void initState() {
+    super.initState();
+    fetchConcerts(rsvp: this.rsvp).then((data) {
+      setState(() {
+        this.concerts = data;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return new FutureBuilder<List<Concert>>(
-      future: fetchConcerts(rsvp: rsvp),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return new ListView.builder(
-              itemCount: snapshot.data.length,
-              itemBuilder: (context, index) {
-                final concert = snapshot.data[index];
-                return this.listItem(concert);
-              });
-        } else if (snapshot.hasError) {
-          return new Text('Failed to fetch data');
-        }
-        return CircularProgressIndicator();
-      },
-    );
+    return new ListView.builder(
+      itemCount: this.concerts.length,
+      itemBuilder: (context, index) {
+        final concert = this.concerts[index];
+        return this.listItem(concert);
+      });
   }
 
   Widget listItem(Concert concert) {
