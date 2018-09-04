@@ -34,12 +34,12 @@ class _ConcertListState extends State<ConcertList> {
     return new ListView.builder(
       itemCount: this.concerts.length,
       itemBuilder: (context, index) {
-        final concert = this.concerts[index];
-        return this.listItem(concert);
+        return this.listItem(index);
       });
   }
 
-  Widget listItem(Concert concert) {
+  Widget listItem(int index) {
+    final concert = this.concerts[index];
     return Container(
         padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 25.0),
         child: Column(
@@ -71,14 +71,14 @@ class _ConcertListState extends State<ConcertList> {
                     margin: EdgeInsets.only(right: 10.0),
                     child: RaisedButton(
                         child: Text("Yes"),
-                        onPressed: yesButtonPressed,
+                        onPressed: () => yesButtonPressed(index),
                         color: Colors.green),
                   ),
                 ),
                 Expanded(
                   child: RaisedButton(
                       child: Text("No"),
-                      onPressed: noButtonPressed,
+                      onPressed: () => noButtonPressed(index),
                       color: Colors.red),
                 ),
               ]),
@@ -88,7 +88,15 @@ class _ConcertListState extends State<ConcertList> {
         ));
   }
 
-  void yesButtonPressed() {}
+  void yesButtonPressed(int index) {
+    this.setState(() {
+      this.concerts.removeAt(index);
+    });
+  }
 
-  void noButtonPressed() {}
+  void noButtonPressed(int index) {
+    this.setState(() {
+      this.concerts.removeAt(index);
+    });
+  }
 }
