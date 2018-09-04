@@ -52,8 +52,32 @@ class ConcertList extends StatelessWidget {
               ],
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
             ),
+            Container(
+              margin: EdgeInsets.only(top: 10.0),
+              child: Row(children: [
+                Expanded(
+                  child: Container(
+                    margin: EdgeInsets.only(right: 10.0),
+                    child: RaisedButton(
+                        child: Text("Yes"),
+                        onPressed: yesButtonPressed,
+                        color: Colors.green),
+                  ),
+                ),
+                Expanded(
+                  child: RaisedButton(
+                      child: Text("No"),
+                      onPressed: noButtonPressed,
+                      color: Colors.red),
+                ),
+              ]),
+            ),
           ],
           crossAxisAlignment: CrossAxisAlignment.start,
         ));
   }
+
+  void yesButtonPressed() {}
+
+  void noButtonPressed() {}
 }
