@@ -3,14 +3,16 @@ import 'dart:async';
 import 'dart:convert';
 
 class Concert {
+  final String id;
   final String artist;
   final String location;
   final DateTime dateTime;
 
-  Concert({this.artist, this.location, this.dateTime});
+  Concert({this.id, this.artist, this.location, this.dateTime});
 
   factory Concert.fromJson(Map<String, dynamic> json) {
     return Concert(
+      id: json['node']['id'],
       artist: json['node']['event']['artist']['name'],
       location: json['node']['event']['location'],
       dateTime: DateTime.parse(json['node']['event']['dateTime']),
@@ -25,6 +27,7 @@ Future<List<Concert>> fetchConcerts({String rsvp = 'not_yet_answered'}) async {
   eventRsvps(rsvp:"$rsvp") {
     edges {
       node {
+        id
         rsvp
         event {
           dateTime
@@ -49,5 +52,20 @@ Future<List<Concert>> fetchConcerts({String rsvp = 'not_yet_answered'}) async {
     return concerts;
   } else {
     throw new Exception('failed to fetch concerts');
+  }
+}
+
+void updateRSVP(String id, String rsvp) async {
+  final response = await http.post('http://10.0.2.2:8000/graphql/', body: {
+    'query': '''
+mutation UpdateRSVP {
+  updateRsvp(input:{clientMutationId:"$id", rsvp:"$rsvp"}) {
+    rsvp
+  }
+}
+    '''
+  });
+  if (response.statusCode != 200) {
+    print(response.body);
   }
 }

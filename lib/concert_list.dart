@@ -90,12 +90,16 @@ class _ConcertListState extends State<ConcertList> {
 
   void yesButtonPressed(int index) {
     this.setState(() {
+      final Concert concert = this.concerts[index];
+      updateRSVP(concert.id, 'yes');
       this.concerts.removeAt(index);
     });
   }
 
   void noButtonPressed(int index) {
     this.setState(() {
+      final Concert concert = this.concerts[index];
+      updateRSVP(concert.id, 'no');
       this.concerts.removeAt(index);
     });
   }
