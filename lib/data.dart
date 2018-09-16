@@ -69,3 +69,18 @@ mutation UpdateRSVP {
     print(response.body);
   }
 }
+
+void addPushToken(String token) async {
+    final response = await http.post('http://10.0.2.2:8000/graphql/', body: {
+    'query': '''
+mutation CreateFirebaseToken {
+  createFirebaseToken(token:"$token") {
+    token
+  }
+}
+    '''
+  });
+  if (response.statusCode != 200) {
+    print(response.body);
+  }
+}
