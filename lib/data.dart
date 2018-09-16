@@ -2,6 +2,8 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 
+const API_URL = 'http://10.0.2.2:8000/graphql/';
+
 class Concert {
   final String id;
   final String artist;
@@ -21,7 +23,7 @@ class Concert {
 }
 
 Future<List<Concert>> fetchConcerts({String rsvp = 'not_yet_answered'}) async {
-  final response = await http.post('http://10.0.2.2:8000/graphql/', body: {
+  final response = await http.post(API_URL, body: {
     'query': '''
 {
   eventRsvps(rsvp:"$rsvp") {
@@ -56,7 +58,7 @@ Future<List<Concert>> fetchConcerts({String rsvp = 'not_yet_answered'}) async {
 }
 
 void updateRSVP(String id, String rsvp) async {
-  final response = await http.post('http://10.0.2.2:8000/graphql/', body: {
+  final response = await http.post(API_URL, body: {
     'query': '''
 mutation UpdateRSVP {
   updateRsvp(input:{clientMutationId:"$id", rsvp:"$rsvp"}) {
@@ -71,7 +73,7 @@ mutation UpdateRSVP {
 }
 
 void addPushToken(String token) async {
-    final response = await http.post('http://10.0.2.2:8000/graphql/', body: {
+    final response = await http.post(API_URL, body: {
     'query': '''
 mutation CreateFirebaseToken {
   createFirebaseToken(token:"$token") {
