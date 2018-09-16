@@ -72,7 +72,7 @@ mutation UpdateRSVP {
   }
 }
 
-void addPushToken(String token) async {
+void createPushToken(String token) async {
     final response = await http.post(API_URL, body: {
     'query': '''
 mutation CreateFirebaseToken {

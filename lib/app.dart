@@ -3,6 +3,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'new_concerts.dart';
 import 'accepted_concerts.dart';
+import 'data.dart';
 
 class App extends StatefulWidget {
   App({Key key}) : super(key: key);
@@ -41,8 +42,9 @@ class _AppState extends State<App> {
       print("Settings registered: $settings");
     });
     _firebaseMessaging.getToken().then((String token) {
-      assert(token != null);
-      print(token);
+      if (token != null) {
+        createPushToken(token);
+      }
     });
   }
 
