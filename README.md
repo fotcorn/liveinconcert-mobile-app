@@ -1,8 +1,13 @@
 # liveinconcert
 
-A new Flutter project.
+Flutter/Dart mobile app to find concerts in Switzerland for artists you follow on Spotify.
 
-## Getting Started
+## Technologies
 
-For help getting started with Flutter, view our online
-[documentation](https://flutter.io/).
+- Dart/Flutter
+- GraphQL API backend: https://github.com/fotcorn/liveinconcert-backend
+- Firebase Cloud Messaging for notifications
+
+## Screenshot
+
+![Screentshot](https://raw.githubusercontent.com/fotcorn/liveinconcert-mobile-app/master/screenshot.jpg)
